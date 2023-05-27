@@ -1,26 +1,26 @@
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { Admin, Resource } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 
 import { PostList, PostEdit, PostCreate } from "./posts";
+import Page from './pages/Page';
+import './pages/page.css'
 
-export const dataProvider = {
-  ...jsonServerProvider('http://localhost:3000'),
-  // getList: () => {
-  //   console.log("asdasdasadasdasdadasd")
-  //   return fetch(`http://localhost:3000/posts`, { method: 'GET' })
-  //     .then(response => response.json())
-  //     .then((data) => {
-  //       console.log("asdasdasadasdasdadasd")
-  //       console.log(data)
-  //       return { data: data._embedded.posts, total: data._embedded.posts.length };
-  //     });
-  // },
+const TestAdmin = () => {
+  return (
+    <Admin basename="/admin" dataProvider={jsonServerProvider('https://api-adv.dblsoft.xyz')}>
+      <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} />
+    </Admin>
+  )
 }
 
 const App = () => (
-  <Admin dataProvider={dataProvider}>
-    <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} />
-  </Admin>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Page />} />
+      <Route path="/admin/*" element={<TestAdmin />} />
+    </Routes>
+  </BrowserRouter>
 );
 
 export default App;
