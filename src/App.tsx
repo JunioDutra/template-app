@@ -3,7 +3,8 @@ import { Admin, Resource } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 
 import { PostList, PostEdit, PostCreate } from "./posts";
-import Page from './pages/Page';
+// import Page from './pages/Page';
+import { Mock1, Mock2, Mock3 } from './pages/Mocks';
 import './pages/page.css'
 import { useEffect, useState } from 'react';
 
@@ -41,7 +42,9 @@ const Sample = () => {
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Page />} />
+      <Route path="/" element={<Mock1 />} />
+      <Route path="/1" element={<Mock2 />} />
+      <Route path="/2" element={<Mock3 />} />
       <Route path="/sample" element={<Sample />} />
       <Route path="/admin/*" element={<TestAdmin />} />
     </Routes>
